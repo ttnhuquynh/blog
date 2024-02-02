@@ -10,13 +10,13 @@ const {user}=useContext(UserContext)
 const {setUser}=useContext(UserContext)
 const navigate=useNavigate()
 
-const handleLogout=async()=>{
+const handleLogout= async () =>{
   try{
-    const res=await axios.get(URL+"/api/auth/logout",{withCredentials:true})
-    // console.log(res)
+    const res = await axios.get(URL+"/api/auth/logout")
     setUser(null)
     navigate("/login")
-
+    localStorage.removeItem('token')
+    axios.defaults.headers.common['Authorization'] = "";
   }
   catch(err){
     console.log(err)
